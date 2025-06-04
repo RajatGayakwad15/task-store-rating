@@ -58,9 +58,15 @@ const Viewusers = () => {
       enableSorting: true,
     },
     {
+      accessorKey: "feedback",
+      header: () => <div className="text-center ">Feedback</div>,
+      cell: (info) => <div className="text-center ">{info.getValue() }</div>,
+      enableSorting: true,
+    },
+    {
       accessorKey: "rating",
       header: () => <div className="text-center ">Rating</div>,
-      cell: (info) => <div className="text-center "><div>{info.getValue() }<Star size={16}/></div></div>,
+      cell: (info) => <div className="text-center ">{info.getValue() }</div>,
       enableSorting: true,
     },
   ];

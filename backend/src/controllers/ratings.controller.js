@@ -29,7 +29,7 @@ const createRating = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Server error",
+      message: "Please Login",
       error: error.message,
     });
   }

@@ -28,7 +28,10 @@ import {
   AlertDialogTrigger,
 } from "../../AdminPanelSetup/components/ui/alert-dialog.tsx";
 
-const Navbar = () => {
+const Navbar = ({ onSearchChange }) => {
+  const handleChange = (e) => {
+    onSearchChange(e.target.value);
+  };
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const toggleMenu = () => {
@@ -49,6 +52,7 @@ const Navbar = () => {
   const handleLogout = () => {
     Cookies.remove("authToken");
     Cookies.remove("userRole");
+    Cookies.remove("user_id");
     navigate("/auth/login");
   };
   return (
@@ -66,8 +70,10 @@ const Navbar = () => {
             <input
               type="text"
               placeholder="Search..."
+              onChange={handleChange}
               className="w-full px-4 py-2 rounded-md bg-[#190F23] text-white border border-[#2c2a29] focus:ring-1 focus:ring-purple-500 focus:outline-none "
             />
+                      
           </div>
 
           <div className="hidden md:block">

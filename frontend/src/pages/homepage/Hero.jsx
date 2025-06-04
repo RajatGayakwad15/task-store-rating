@@ -33,7 +33,7 @@ const UserCard = ({ name, rated, email, address, image, onRateClick }) => {
   );
 };
 
-const Hero = React.forwardRef((props, ref) => {
+const Hero = React.forwardRef(({ searchQuery }, ref) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [ratingsAndFeedback, setRatingsAndFeedback] = useState({});
@@ -136,6 +136,17 @@ const Hero = React.forwardRef((props, ref) => {
     }
   };
 
+  const filteredStores = getuser?.stores?.filter((store) => {
+    if (!searchQuery) return true;
+
+    const lowerQuery = searchQuery.toLowerCase();
+    return (
+      store.name?.toLowerCase().includes(lowerQuery) ||
+      store.email?.toLowerCase().includes(lowerQuery) ||
+      store.address?.toLowerCase().includes(lowerQuery)
+    );
+  });
+
   const StarRating = ({ rating, setRating, setRatingError }) => {
     return (
       <div className="flex flex-col mb-4">
@@ -164,7 +175,7 @@ const Hero = React.forwardRef((props, ref) => {
   return (
     <div
       ref={ref}
-      className="max-w-7xl mx-auto min-h-screen bg-[#210323] p-6 relative font-sans "
+      className="max-w-7xl mx-auto pb-30 bg-[#210323] p-6 relative font-sans "
     >
       <div className="flex justify-center p-4 md:p-10">
         <h1 className="md:text-5xl text-2xl font-extrabold tracking-tight">
@@ -173,8 +184,8 @@ const Hero = React.forwardRef((props, ref) => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {getuser?.stores?.length > 0 ? (
-          getuser.stores.map((user, index) => (
+        {filteredStores?.length > 0 ? (
+          filteredStores.map((user, index) => (
             <div
               key={index}
               custom={index}
@@ -194,7 +205,7 @@ const Hero = React.forwardRef((props, ref) => {
           ))
         ) : (
           <div className="col-span-full flex flex-col justify-center items-center min-h-[300px] w-full">
-            <div className="text-gray-500"> No Store Found</div>
+            <div className="text-gray-500"> No matching stores found</div>
             <img
               src={noresult}
               alt="no result"

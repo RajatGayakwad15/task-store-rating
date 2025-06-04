@@ -88,6 +88,7 @@ export default function AdminLayout() {
   const handleLogout = ()=>{
        Cookies.remove('authToken') // Replace 'token' with your actual cookie name
      Cookies.remove('userRole')
+      Cookies.remove("user_id");
      naviget("/auth/login")
   }
 

@@ -245,15 +245,83 @@ const getAllStoreOwners = async (req, res) => {
 // const StoreOwner = require("../models/StoreOwner");
 // const StoreRating = require("../models/StoreRating");
 
+// const getAllStores = async (req, res) => {
+//   try {
+//     const { searchQuery } = req.query;
+//     const token = req.headers.authtoken;
+//     const decodedToken = await jwt.verify(token, "JWTSECRETKEY@4815");
+//     const { id } = decodedToken;
+//     const userId = id;
+
+//     console.log(userId);
+//     const whereClause = {};
+
+//     if (searchQuery) {
+//       whereClause[Op.or] = [
+//         { name: { [Op.like]: `%${searchQuery}%` } },
+//         { address: { [Op.like]: `%${searchQuery}%` } },
+//       ];
+//     }
+
+//     const stores = await StoreOwner.findAll({ where: whereClause });
+
+//     // For each store, check if user has already rated
+//     const storeWithRatings = await Promise.all(
+//       stores.map(async (store) => {
+//         let alreadyRated = false;
+
+//         if (userId) {
+//           const rating = await StoreRating.findOne({
+//             where: {
+//               store_id: store.id,
+//               user_id: userId,
+//             },
+//           });
+
+//           if (rating) alreadyRated = true;
+//         }
+
+//         return {
+//           ...store.toJSON(),
+//           already_rated: alreadyRated,
+//         };
+//       })
+//     );
+
+//     res.status(200).json({
+//       status: true,
+//       success: true,
+//       message: storeWithRatings.length
+//         ? "Stores fetched successfully"
+//         : "No stores found",
+//       stores: storeWithRatings,
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       status: false,
+//       success: false,
+//       message: "Server error",
+//       error: error.message,
+//     });
+//   }
+// };
+
 const getAllStores = async (req, res) => {
   try {
     const { searchQuery } = req.query;
     const token = req.headers.authtoken;
-    const decodedToken = await jwt.verify(token, "JWTSECRETKEY@4815");
-    const { id } = decodedToken;
-    const userId = id;
+    let userId = null;
 
-    console.log(userId);
+    if (token) {
+      try {
+        const decodedToken = jwt.verify(token, "JWTSECRETKEY@4815");
+        userId = decodedToken.id;
+      } catch (err) {
+        // Token is invalid or expired, proceed without user ID
+        console.warn("Invalid token:", err.message);
+      }
+    }
+
     const whereClause = {};
 
     if (searchQuery) {
@@ -265,7 +333,7 @@ const getAllStores = async (req, res) => {
 
     const stores = await StoreOwner.findAll({ where: whereClause });
 
-    // For each store, check if user has already rated
+    // Append `already_rated` only if userId is available
     const storeWithRatings = await Promise.all(
       stores.map(async (store) => {
         let alreadyRated = false;
@@ -297,6 +365,7 @@ const getAllStores = async (req, res) => {
       stores: storeWithRatings,
     });
   } catch (error) {
+    console.error("Error fetching stores:", error);
     res.status(500).json({
       status: false,
       success: false,
@@ -306,46 +375,6 @@ const getAllStores = async (req, res) => {
   }
 };
 
-// const getAllStores = async (req, res) => {
-//   try {
-//     const { searchQuery } = req.query;
-
-//     const whereClause = {};
-
-//     if (searchQuery) {
-//       whereClause[Op.or] = [
-//         { name: { [Op.like]: `%${searchQuery}%` } },
-//         { address: { [Op.like]: `%${searchQuery}%` } },
-//       ];
-//     }
-
-//     const stores = await StoreOwner.findAll({
-//       where: whereClause,
-//       // include: [
-//       //   {
-//       //     model: User,
-//       //     attributes: ['name', 'email'], // fetch only name & email
-//       //   },
-//       // ],
-//     });
-
-//     res.status(200).json({
-//       status: true,
-//       success: true,
-//       message: stores.length
-//         ? "Stores fetched successfully"
-//         : "No stores found",
-//       stores, // each store will have `User: { name, email }`
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       status: false,
-//       success: false,
-//       message: "Server error",
-//       error: error.message,
-//     });
-//   }
-// };
 
 const updateStoreOwner = async (req, res) => {
   try {
