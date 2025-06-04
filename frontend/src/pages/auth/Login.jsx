@@ -38,8 +38,16 @@ const Login = () => {
     mutationKey: ["register-user"],
     mutationFn: Loging,
     onSuccess: (data) => {
-      console.log("API response in onSuccess:", data); // 👈 Add this line
+      console.log("API response in onSuccess:", data); 
+       if (data?.message === "Invalid credentials") {
+    toast.error("Invalid credentials");
+    return;
+  }// 👈 Add this line
       const token = data?.token;
+      if (!token || typeof token !== 'string' ) {
+    toast.error("Invalid credentials");
+    return;
+  }
       Cookies.set("authToken", token, { expires: 7 });
       const userRole = data?.user?.role_id;
       console.log("userRole", userRole);
@@ -69,10 +77,11 @@ const Login = () => {
         // const errorMessage =
         //   data?.errors?.[0] || data?.message || 'Registration failed.'
         // console.log(errorMessage)
-        toast.error(message);
+        toast.error(+message);
       }
     },
     onError: (error) => {
+      console.log("error")
       toast.error(error?.message || "An error occurred.");
     },
   });

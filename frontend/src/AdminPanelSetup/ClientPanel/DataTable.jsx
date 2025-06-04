@@ -27,10 +27,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select.tsx";
-// import { DataTableSkeleton } from "";
 import { useNavigate } from "react-router-dom";
 import { Skeleton } from "../components/ui/skeleton.tsx";
-// import SearchOrder from "";
 
 export function DataTable({
   data,
@@ -56,7 +54,7 @@ export function DataTable({
   showModal,
   setShowModal,
   authorityMessage,
-  getuserratingaverage
+  getuserratingaverage,
 }) {
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState("all");
@@ -126,7 +124,6 @@ export function DataTable({
           )}
         </div>
 
-        {/* select options */}
         {selectOptions.length > 0 && (
           <div className="mx-2">
             <Select
@@ -156,7 +153,6 @@ export function DataTable({
         )}
 
         <div className="flex items-center justify-end w-full">
-          
           {showAddNewButton === "yes" && (
             <Button
               size="sm"
@@ -167,43 +163,14 @@ export function DataTable({
               Add New
             </Button>
           )}
-          {/* <div className=" ">
-        <div className="  ">
-          <div className="bg-[#161618] border border-[#2c2c2e] rounded-full w-[500px] h-[60px] flex items-center px-4 text-white text-lg font-medium">
-            Average : 5
-          </div>
-        </div>
-      </div> */}
-      <Button
-              size="sm"
-              className=" mr-2"
-              // onClick={onAddNewClick}
-              variant="outline"
-            >
-              Average : {getuserratingaverage}
-            </Button>
 
-          {/* <Select onValueChange={(value) => onPageSizeChange(Number(value))}>
-            <SelectTrigger className="w-24 border rounded px-2 py-1 bg-black text-white cursor-pointer">
-              <SelectValue placeholder={`${pageSize} rows`} />
-            </SelectTrigger>
-            <SelectContent className="bg-black text-white">
-              {[ 25, 50, 100].map((size) => (
-                <SelectItem
-                  key={size}
-                  value={size.toString()}
-                  className="hover:bg-gray-800 cursor-pointer"
-                >
-                  {size} rows
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select> */}
+          <Button size="sm" className=" mr-2" variant="outline">
+            Average : {getuserratingaverage}
+          </Button>
         </div>
       </div>
 
       {false ? (
-        // <DataTableSkeleton />
         <></>
       ) : (
         <div>
@@ -259,11 +226,6 @@ export function DataTable({
                     <TableRow
                       key={row.id}
                       className="text-center cursor-pointer"
-                      // onClick={() => {
-                      //   if (rowClickPath) {
-                      //     navigate(`${rowClickPath}/${row.original.id}`);
-                      //   }
-                      // }}
                     >
                       {row.getVisibleCells().map((cell) => (
                         <TableCell key={cell.id} className="text-center px-5">
@@ -290,47 +252,8 @@ export function DataTable({
               </TableBody>
             </Table>
           </div>
-          <div className="flex items-center justify-end space-x-2 py-4">
-            {/* <div className="flex-1 text-sm text-muted-foreground">
-              {(() => {
-                if (!totalRecords) return "0 records";
-
-                const start = pageIndex * pageSize + 1;
-                const end = Math.min((pageIndex + 1) * pageSize, totalRecords);
-
-                return `${start}-${end} of ${totalRecords}`;
-              })()}
-            </div> */}
-
-            {/* <div className="space-x-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() =>
-                  setTimeout(() => onPageChange(pageIndex - 1), 300)
-                }
-                disabled={pageIndex === 0}
-                className="cursor-pointer"
-              >
-                Previous
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() =>
-                  setTimeout(() => onPageChange(pageIndex + 1), 300)
-                }
-                disabled={pageIndex >= totalPages - 1}
-                className="cursor-pointer"
-              >
-                Next
-              </Button>
-            </div> */}
-          </div>
-          {isClientPortal === "Yes" && showModal === true && (
-            // <SearchOrder setShowModal={setShowModal} />
-            <></>
-          )}
+          <div className="flex items-center justify-end space-x-2 py-4"></div>
+          {isClientPortal === "Yes" && showModal === true && <></>}
         </div>
       )}
     </div>

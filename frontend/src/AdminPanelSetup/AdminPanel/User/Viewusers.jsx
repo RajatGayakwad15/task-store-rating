@@ -109,7 +109,7 @@ const Viewusers = () => {
   };
 
   const columns = [
-    {
+   {
       id: "index",
       header: () => <div className="text-center">Id</div>,
       cell: ({ row }) => <div className="text-center">{row.index + 1}</div>,
@@ -152,28 +152,13 @@ const Viewusers = () => {
       header: "Actions",
       cell: ({ row }) => (
         <div className="flex space-x-2 justify-center">
-          {/* <div className="relative group">
-            <Button
-              variant="ghost"
-              className="h-8 w-8 p-0 cursor-pointer"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleEditClick(row.original.id);
-              }}
-            >
-              <Edit size={16} />
-            </Button>
-            <span className="absolute bottom-full left-1/2 -translate-x-1/2 mt-2 hidden group-hover:block bg-black text-white text-xs px-2 py-1 rounded-md">
-              Edit
-            </span>
-          </div> */}
 
           <div className="relative group">
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button
                   onClick={(e) => e.stopPropagation()}
-                  // onClick={handleDelete}
+         
                   variant="ghost"
                   className="h-8 w-8 p-0 cursor-pointer"
                 >
@@ -245,11 +230,6 @@ const Viewusers = () => {
     address: "",
   };
 
-  // const validationSchema = Yup.object({
-  //   name: Yup.string().required("Name is required"),
-  //   email: Yup.string().email("Invalid email").required("Email is required"),
-  //   address: Yup.string().required("Address is required"),
-  // });
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -266,17 +246,13 @@ const Viewusers = () => {
       ),
   });
 
-  // const handleSubmit = (values, { resetForm }) => {
-  //   console.log("Form values:", values);
-  //   resetForm();
-  //   handleClose();
-  // };
+
 
   const handleSubmit = (values, { resetForm }) => {
     console.log("Form values:", values);
     adduser(values);
     resetForm();
-    // handleClose();
+
   };
 
   const { data: getuser } = useQuery({
@@ -296,9 +272,9 @@ const Viewusers = () => {
             className="fixed inset-0 z-40"
             style={{
               backdropFilter: "blur(2px)",
-              backgroundColor: "rgba(16, 16, 16, 0.1)", // #101010 with opacity
+              backgroundColor: "rgba(16, 16, 16, 0.1)", 
             }}
-            onClick={() => setShowModal(false)} // Close modal when background is clicked
+            onClick={() => setShowModal(false)} 
           />
           <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-black rounded-lg shadow-lg p-6 w-96 relative">

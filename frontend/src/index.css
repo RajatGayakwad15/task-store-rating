@@ -183,21 +183,20 @@
   }
 }
 .fade-in {
-  animation: fadeInUpAnimation 1s ease-out forwards; /* Adjust duration as needed */
+  animation: fadeInUpAnimation 1s ease-out forwards; 
 }
 
 @keyframes fadeInUpAnimation {
   from {
     opacity: 0;
-    transform: translateY(90px); /* Start slightly below its final position */
+    transform: translateY(90px); 
   }
   to {
     opacity: 1;
-    transform: translateY(0); /* End at its original position */
+    transform: translateY(0); 
   }
 }
 
-/* Keyframes for animations */
 @keyframes burst-scale {
   0% {
     transform: scale(0);
@@ -220,48 +219,48 @@
 }
 @keyframes slide-up {
   0% {
-    transform: translateY(20px); /* Starts slightly lower */
-    opacity: 0; /* Fully transparent */
+    transform: translateY(20px);
+    opacity: 0; 
   }
   100% {
-    transform: translateY(0); /* Ends at original position */
-    opacity: 1; /* Fully opaque */
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
 .animate-slide-up {
-  animation: slide-up 0.8s ease-out forwards; /* Smooth easing */
-  opacity: 0; /* Ensure it starts transparent */
+  animation: slide-up 0.8s ease-out forwards; 
+  opacity: 0; 
 }
 
-/* Add a smooth floating animation for the dots */
+
 @keyframes float {
   0%,
   100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px); /* Float upwards */
+    transform: translateY(-10px);
   }
 }
 
 .animate-float {
-  animation: float 1.5s ease-in-out infinite; /* Smooth and continuous */
+  animation: float 1.5s ease-in-out infinite; 
 }
 
-/* For the sparkle bounce effect, ensure it has a smooth bounce */
+
 @keyframes sparkle-bounce {
   0%,
   100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-15px); /* Bounce upwards */
+    transform: translateY(-15px); 
   }
 }
 
 .animate-sparkle-bounce {
-  animation: sparkle-bounce 1s ease-in-out infinite; /* Smooth bouncing */
+  animation: sparkle-bounce 1s ease-in-out infinite; 
 }
 @keyframes float {
   0% {
@@ -274,7 +273,7 @@
   }
 }
 
-/* Animation classes */
+
 .animate-burst-scale {
   animation: burst-scale 1s ease-out forwards;
 }
@@ -289,21 +288,21 @@
 
 @keyframes slide-up {
   0% {
-    transform: translateY(20px); /* Start slightly below */
-    opacity: 0; /* Fully transparent */
+    transform: translateY(20px); 
+    opacity: 0; 
   }
   100% {
-    transform: translateY(0); /* End at original position */
-    opacity: 1; /* Fully opaque */
+    transform: translateY(0); 
+    opacity: 1; 
   }
 }
 
 .animate-slide-up {
-  animation: slide-up 0.8s ease-out forwards; /* Use ease-out for a smooth finish */
-  opacity: 0; /* Set the starting opacity */
+  animation: slide-up 0.8s ease-out forwards;
+  opacity: 0;
 }
 
-/* Delay classes */
+
 .delay-100 {
   animation-delay: 100ms;
 }

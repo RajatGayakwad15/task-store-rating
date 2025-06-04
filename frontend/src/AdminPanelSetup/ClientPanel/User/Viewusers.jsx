@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DataTable } from "../DataTable.jsx"; // adjust path as needed
+import { DataTable } from "../DataTable.jsx"; 
 import { useQuery } from "@tanstack/react-query";
 import { Card } from "../../components/ui/card.tsx";
 import {
@@ -7,6 +7,7 @@ import {
   getratingstore,
   getratingstoreaverage,
 } from "../../../api/Getapi.jsx";
+import { Star } from "lucide-react";
 
 const Viewusers = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -36,17 +37,12 @@ const Viewusers = () => {
   console.log(getuserratingaverage, "getuserratingaverage");
 
   const columns = [
-    // {
-    //   accessorKey: "id",
-    //   header: () => <div className="text-center">Id</div>,
-    //   cell: (info) => <div className="text-center">{info.getValue()}</div>,
-    //   enableSorting: true,
-    // },
+  
     {
       id: "index",
       header: () => <div className="text-center">Id</div>,
       cell: ({ row }) => <div className="text-center">{row.index + 1}</div>,
-      enableSorting: false, // Disable sorting for serial number
+      enableSorting: false, 
     },
 
     {
@@ -63,8 +59,8 @@ const Viewusers = () => {
     },
     {
       accessorKey: "rating",
-      header: () => <div className="text-center">Rating</div>,
-      cell: (info) => <div className="text-center">{info.getValue()}</div>,
+      header: () => <div className="text-center ">Rating</div>,
+      cell: (info) => <div className="text-center "><div>{info.getValue() }<Star size={16}/></div></div>,
       enableSorting: true,
     },
   ];
@@ -87,13 +83,7 @@ const Viewusers = () => {
       <DataTable
         data={getuserrating?.data || []}
         columns={columns}
-        // onAddNewClick={() => alert("Add New Clicked")}
-        // showAddNewButton="yes"
-        // selectOptions={[
-        //   { label: "All", value: "all" },
-        //   { label: "Admin", value: "admin" },
-        //   { label: "User", value: "user" },
-        // ]}
+     
         onSelectChange={handleSelectChange}
         pagination={pagination}
         onPageChange={handlePageChange}

@@ -3,12 +3,12 @@ import React from "react";
 export default function HeroSection({ onScroll }) {
   return (
     <section
-      className="min-h-screen flex flex-col items-center justify-center px-6" // Added flex-col to stack items vertically
+      className="min-h-screen flex flex-col items-center justify-center px-6" 
       style={{
-        background: "linear-gradient(to bottom right, #1a202c, #220123)", // gray-900 to #220123
+        background: "linear-gradient(to bottom right, #1a202c, #220123)", 
       }}
     >
-      <div className=" text-center text-white space-y-8 mt-20 "> {/* Added mb-12 for spacing from the button */}
+      <div className=" text-center text-white space-y-8 mt-20 "> 
         <h1 data-aos="fade-down" className="md:text-7xl text-3xl font-extrabold tracking-tight">
           Rate Your Favorite Store
         </h1>
@@ -18,7 +18,7 @@ export default function HeroSection({ onScroll }) {
         </p>
 
         <div data-aos="fade-right" className="flex justify-center space-x-3 text-yellow-400 text-4xl">
-          {/* Static 5 stars */}
+          
           {[1, 2, 3, 4, 5].map((star) => (
             <svg
               key={star}
@@ -40,9 +40,7 @@ export default function HeroSection({ onScroll }) {
         </p>
       </div>
 
-      {/* Animated Arrow Button */}
-      {/* Positioned at the bottom using absolute positioning relative to the section,
-          or simply allowed to flow after the content block */}
+    
       <div  className="mt-8"> 
         <button
         data-aos="zoom-in"
@@ -72,7 +70,6 @@ export default function HeroSection({ onScroll }) {
         </button>
       </div>
 
-      {/* --- CSS for the custom animation --- */}
       <style jsx>{`
         @keyframes bounce-custom {
           0%, 100% {

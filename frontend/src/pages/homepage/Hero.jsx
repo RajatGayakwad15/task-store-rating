@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAllStores, getAllUsers } from "../../api/Getapi";
 import { AddSRating } from "../../api/Postapi";
 import toast from "react-hot-toast";
+import noresult from "../../assets/noresult.png";
 
 const UserCard = ({ name, rated, email, address, image, onRateClick }) => {
   return (
@@ -38,68 +39,6 @@ const Hero = React.forwardRef((props, ref) => {
   const [ratingsAndFeedback, setRatingsAndFeedback] = useState({});
   const [currentRating, setCurrentRating] = useState(0);
   const [currentFeedback, setCurrentFeedback] = useState("");
-  const users = [
-    {
-      store_name: "Galaxy Groceries",
-      email: "info@galaxygroceries.com",
-      address: "101 Stellar Street, Nebula City, Karnataka, 560001",
-      image: "https://via.placeholder.com/100/FF5733/FFFFFF?text=GROCERIES",
-    },
-    {
-      store_name: "Zenith Electronics",
-      email: "contact@zenithelectronics.in",
-      address: "205 Silicon Valley Road, Tech Park, Maharashtra, 400010",
-      image: "https://via.placeholder.com/100/33FF57/FFFFFF?text=ELECTRONICS",
-    },
-    {
-      store_name: "Crimson Bookstore",
-      email: "support@crimsonbooks.co.in",
-      address: "301 Knowledge Avenue, Old Town, West Bengal, 700001",
-      image: "https://via.placeholder.com/100/3357FF/FFFFFF?text=BOOKS",
-    },
-    {
-      store_name: "Spice Route Delights",
-      email: "orders@spiceroutedelights.com",
-      address: "402 Masala Lane, Heritage Market, Delhi, 110006",
-      image: "https://via.placeholder.com/100/FF33A1/FFFFFF?text=FOOD",
-    },
-    {
-      store_name: "Urban Threads Boutique",
-      email: "sales@urbanthreads.fashion",
-      address: "503 Style Street, Fashion District, Tamil Nadu, 600008",
-      image: "https://via.placeholder.com/100/A1FF33/FFFFFF?text=FASHION",
-    },
-    {
-      store_name: "Green Thumb Nursery",
-      email: "grow@greenthumb.net",
-      address: "601 Garden Road, Bloom Meadows, Uttar Pradesh, 201301",
-      image: "https://via.placeholder.com/100/5733FF/FFFFFF?text=NURSERY",
-    },
-    {
-      store_name: "Paws & Claws Pet Store",
-      email: "hello@pawsandclaws.org",
-      address: "707 Animal Avenue, Furry Friends Colony, Gujarat, 380009",
-      image: "https://via.placeholder.com/100/FFBB33/FFFFFF?text=PETS",
-    },
-    {
-      store_name: "The Daily Grind Cafe",
-      email: "coffee@thedailygrind.in",
-      address: "808 Bean Street, Awakened Quarter, Punjab, 141001",
-      image: "https://via.placeholder.com/100/33A1FF/FFFFFF?text=CAFE",
-    },
-    {
-      store_name: "Bright Minds Toys",
-      email: "play@brightmindstoys.com",
-      address: "909 Imagination Lane, Kidsville, Rajasthan, 302004",
-      image: "https://via.placeholder.com/100/BB33FF/FFFFFF?text=TOYS",
-    },
-    {
-      store_name: "Azure Art Supplies",
-      email: "create@azureart.in",
-      address: "1010 Canvas Corner, Palette Plaza, Kerala, 695001",
-      image: "https://via.placeholder.com/100/33FFBB/FFFFFF?text=ART",
-    },
-  ];
 
   const queryClient = useQueryClient();
 
@@ -122,8 +61,7 @@ const Hero = React.forwardRef((props, ref) => {
     mutationKey: ["add-ratting"],
     mutationFn: AddSRating,
     onSuccess: (data) => {
-      console.log("API response in onSuccess:", data); // 👈 Add this line
-      // handleClose();
+      console.log("API response in onSuccess:", data);
 
       if (!data) {
         toast.error("Something went wrong. Please try again.");
@@ -162,62 +100,13 @@ const Hero = React.forwardRef((props, ref) => {
 
   const openModalForUser = (user) => {
     setSelectedUser(user);
-    // const storedData = ratingsAndFeedback[user.store_name];
-    // if (storedData) {
-    //   setCurrentRating(storedData.rating);
-    //   setCurrentFeedback(storedData.feedback);
-    // } else {
-    //   setCurrentRating(0);
-    //   setCurrentFeedback("");
-    // }
 
     setCurrentRating(0);
     setCurrentFeedback("");
     setShowModal(true);
   };
   const [ratingError, setRatingError] = useState("");
-  // const handleSubmitRatingAndFeedback = () => {
-  //   if (selectedUser) {
 
-  //     setRatingsAndFeedback((prevRatings) => ({
-  //       ...prevRatings,
-  //       [selectedUser.store_name]: {
-  //         rating: currentRating,
-  //         feedback: currentFeedback,
-  //       },
-  //     }));
-  //     setShowModal(false);
-  //     setCurrentRating(0);
-  //     setCurrentFeedback("");
-  //   }
-  // };
-
-  // const handleSubmitRatingAndFeedback = () => {
-  //   if (currentRating === 0) {
-  //     setRatingError("Please select at least one star.");
-  //     return;
-  //   }
-
-  //   if (selectedUser) {
-  //     setRatingsAndFeedback((prevRatings) => ({
-  //       ...prevRatings,
-  //       [selectedUser.store_name]: {
-  //         rating: currentRating,
-  //         feedback: currentFeedback,
-  //       },
-  //     }));
-  //     setShowModal(false);
-  //     setCurrentRating(0);
-  //     setCurrentFeedback("");
-  //     setRatingError("");
-  //     addrating({
-  //       user_id: userid, // Replace with actual user ID
-  //       store_id: selectedUser?.id, // Replace with actual store ID
-  //       rating: currentRating, // Replace with actual rating (1-5)
-  //       feedback: currentFeedback, // Replace with actual feedback
-  //     });
-  //   }
-  // };
   const handleSubmitRatingAndFeedback = () => {
     if (currentRating === 0) {
       setRatingError("Please select at least one star.");
@@ -233,15 +122,13 @@ const Hero = React.forwardRef((props, ref) => {
         },
       }));
 
-      // Call mutation
       addrating({
-        user_id: userid, // Replace with actual user ID
-        store_id: selectedUser?.id, // Replace with actual store ID
-        rating: currentRating, // Replace with actual rating (1-5)
+        user_id: userid,
+        store_id: selectedUser?.id,
+        rating: currentRating,
         feedback: currentFeedback,
       });
 
-      // Reset UI state
       setShowModal(false);
       setCurrentRating(0);
       setCurrentFeedback("");
@@ -249,25 +136,6 @@ const Hero = React.forwardRef((props, ref) => {
     }
   };
 
-  // const StarRating = ({ rating, setRating }) => {
-  //   return (
-  //     <div className="flex space-x-1 mb-4">
-  //       {[1, 2, 3, 4, 5].map((star) => (
-  //         <span
-  //           key={star}
-  //           className={`cursor-pointer text-2xl transition-colors duration-200 ${
-  //             star <= rating
-  //               ? "text-yellow-400"
-  //               : "text-gray-500 hover:text-gray-400"
-  //           }`}
-  //           onClick={() => setRating(star)}
-  //         >
-  //           &#9733;
-  //         </span>
-  //       ))}
-  //     </div>
-  //   );
-  // };
   const StarRating = ({ rating, setRating, setRatingError }) => {
     return (
       <div className="flex flex-col mb-4">
@@ -282,7 +150,7 @@ const Hero = React.forwardRef((props, ref) => {
               }`}
               onClick={() => {
                 setRating(star);
-                setRatingError(""); // clear error when clicked
+                setRatingError("");
               }}
             >
               &#9733;
@@ -325,7 +193,14 @@ const Hero = React.forwardRef((props, ref) => {
             </div>
           ))
         ) : (
-          <div className="text-center text-gray-500 py-6">No users found.</div>
+          <div className="col-span-full flex flex-col justify-center items-center min-h-[300px] w-full">
+            <div className="text-gray-500"> No Store Found</div>
+            <img
+              src={noresult}
+              alt="no result"
+              className="w-40 h-40 object-contain"
+            />
+          </div>
         )}
       </div>
 
@@ -335,7 +210,7 @@ const Hero = React.forwardRef((props, ref) => {
             className="fixed inset-0 z-40"
             style={{
               backdropFilter: "blur(2px)",
-              backgroundColor: "rgba(16, 16, 16, 0.1)", // #101010 with opacity
+              backgroundColor: "rgba(16, 16, 16, 0.1)",
             }}
             onClick={() => {
               setShowModal(false);
@@ -388,10 +263,7 @@ const Hero = React.forwardRef((props, ref) => {
                   <h4 className="text-lg font-medium mb-2 text-purple-200">
                     Your Rating:
                   </h4>
-                  {/* <StarRating
-                    rating={currentRating}
-                    setRating={setCurrentRating}
-                  /> */}
+
                   <StarRating
                     rating={currentRating}
                     setRating={setCurrentRating}
@@ -415,7 +287,6 @@ const Hero = React.forwardRef((props, ref) => {
                   ></textarea>
                 </div>
 
-                {/* Submit Button */}
                 <button
                   className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 cursor-pointer px-4 rounded-md mt-4 transition duration-300 ease-in-out shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-[#101010]"
                   onClick={handleSubmitRatingAndFeedback}
