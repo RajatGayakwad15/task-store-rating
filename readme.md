@@ -49,8 +49,8 @@ CREATE DATABASE store_rating_db;
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
-cd store-rating-app
+git clone https://github.com/RajatGayakwad15/task-store-rating.git
+cd task-store-rating
 ```
 
 ### 2. Backend Setup (Node + Express)
