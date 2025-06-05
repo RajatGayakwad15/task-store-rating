@@ -179,6 +179,7 @@ const Navbar = ({ onSearchChange }) => {
                 <input
                   type="text"
                   placeholder="Search..."
+                  onChange={handleChange}
                   className="w-full px-4 py-2 rounded-md bg-[#190F23] text-white border border-[#2b292c] focus:outline-none focus:ring-1"
                 />
               </div>

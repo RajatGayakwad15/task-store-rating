@@ -75,6 +75,22 @@ The frontend will be available at [http://localhost:5173](http://localhost:5173)
 
 ---
 
+## Admin Credential
+
+Email: admin@gmail.com  
+Password: Admin@123
+
+## Store Credential
+
+email: apple@gmail.com
+password: Apple@123
+
+## User Credential
+
+email: textuser@gmail.com
+password: User@123
+   
+
 ## 📬 Notes
 
 - Make sure the backend is running before starting the frontend.
